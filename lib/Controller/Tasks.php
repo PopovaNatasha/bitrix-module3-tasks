@@ -27,7 +27,7 @@ class Tasks extends Controller
 		];
 	}
 
-	public function deleteTaskAction(int $pageNumber = 1)
+	public function deleteTaskAction()
 	{
 
 	}

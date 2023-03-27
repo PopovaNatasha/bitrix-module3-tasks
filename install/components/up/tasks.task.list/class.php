@@ -6,12 +6,12 @@ use Up\Tasks\Model\TaskTable,
 	Up\Tasks\Model\StatusTable,
 	Bitrix\Main\Context;
 
+if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true) die();
 
 class TaskListComponent extends CBitrixComponent
 {
 	public function executeComponent()
 	{
-		// $this->fetchTasksList();
 		$this->includeComponentTemplate();
 		if (Context::getCurrent()->getRequest()->isPost())
 		{

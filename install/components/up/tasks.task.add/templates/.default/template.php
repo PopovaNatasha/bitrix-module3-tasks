@@ -52,7 +52,6 @@ if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true) die();
 			</div>
 		</div>
 
-
 		<div class="field is-grouped">
 			<div class="control">
 				<button class="button is-link">Create</button>

@@ -1,9 +1,8 @@
 <?php
 
-use Up\Tasks\Model\PriorityTable;
-use Up\Tasks\Model\ResponsibleTable;
-use Up\Tasks\Model\TaskTable,
-	Up\Tasks\Model\StatusTable,
+use Up\Tasks\Model\PriorityTable,
+	Up\Tasks\Model\ResponsibleTable,
+	Up\Tasks\Model\TaskTable,
 	Bitrix\Main\Context;
 
 if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true) die();

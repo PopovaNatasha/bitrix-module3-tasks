@@ -11,9 +11,7 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title><?php $APPLICATION->ShowTitle(); ?></title>
 
-	<?php
-	$APPLICATION->ShowHead();
-	?>
+	<?php $APPLICATION->ShowHead(); ?>
 </head>
 <body>
 <?php $APPLICATION->ShowPanel(); ?>

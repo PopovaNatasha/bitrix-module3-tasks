@@ -33,6 +33,17 @@ Replace following lines in your `${doc_root}/.htaccess` file:
 +RewriteRule ^(.*)$ /index.php [L]
 ```
 
+Put following content into your `${doc_root}/local/php_interface/init.php`:
+
+```php
+Bitrix\Main\Loader::registerAutoLoadClasses(null, [
+	'Up\Tasks\Model\TaskTable' => '/local/modules/up.tasks/lib/Model/TaskTable.php',
+	'Up\Tasks\Model\StatusTable' => '/local/modules/up.tasks/lib/Model/StatusTable.php',
+	'Up\Tasks\Model\PriorityTable' => '/local/modules/up.tasks/lib/Model/PriorityTable.php',
+	'Up\Tasks\Model\ResponsibleTable' => '/local/modules/up.tasks/lib/Model/ResponsibleTable.php'
+]);
+```
+
 ## Symlinks for handy development
 
 You probably want to make following symlinks:
@@ -41,4 +52,5 @@ You probably want to make following symlinks:
 local/components/up -> local/modules/up.tasks/install/components/up
 local/templates/tasks -> local/modules/up.tasks/install/templates/projector
 local/routes/tasks.php -> local/modules/up.tasks/install/routes/tasks.php
+local/js/up -> local/modules/up.tasks/install/js/up
 ```

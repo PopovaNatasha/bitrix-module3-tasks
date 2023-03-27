@@ -2,8 +2,6 @@
 
 namespace Up\Tasks\Task;
 
-use Up\Tasks\Model\PriorityTable;
-use Up\Tasks\Model\ResponsibleTable;
 use Up\Tasks\Model\TaskTable;
 
 class Repository
