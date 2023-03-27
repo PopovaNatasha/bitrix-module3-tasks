@@ -5,6 +5,7 @@
 */
 
 \Bitrix\Main\UI\Extension::load('up.task-list');
+\Bitrix\Main\UI\Extension::load('task-add');
 
 if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true) die();
 ?>
