@@ -55,11 +55,6 @@ class StatusTable extends DataManager
 					'validation' => [__CLASS__, 'validateName'],
 				]
 			),
-			// new Reference(
-			// 	'TASK',
-			// 	TasksTable::class,
-			// 	Join::on('this.ID', 'ref.STATUS_ID')
-			// )
 		];
 	}
 

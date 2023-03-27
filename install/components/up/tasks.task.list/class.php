@@ -3,15 +3,20 @@
 use Up\Tasks\Model\PriorityTable;
 use Up\Tasks\Model\ResponsibleTable;
 use Up\Tasks\Model\TaskTable,
-	Up\Tasks\Model\StatusTable;
+	Up\Tasks\Model\StatusTable,
+	Bitrix\Main\Context;
 
 
 class TaskListComponent extends CBitrixComponent
 {
 	public function executeComponent()
 	{
-		$this->fetchTasksList();
+		// $this->fetchTasksList();
 		$this->includeComponentTemplate();
+		if (Context::getCurrent()->getRequest()->isPost())
+		{
+			$this->deleteTask();
+		}
 	}
 
 	protected function fetchTasksList()
@@ -35,26 +40,27 @@ class TaskListComponent extends CBitrixComponent
 		// 	var_dump($task->getTitle());
 		// }
 		//
-		$result = TaskTable::getList([
-			'select' => [
-				'*',
-				'STATUS_NAME' => 'STATUS.NAME',
-				'PRIORITY_NAME' => 'PRIORITY.NAME',
-				'RESPONSIBLE_NAME' => 'RESPONSIBLE.NAME'
-			]
-		]);
-		$tasks = [];
-
-		foreach ($result as $item)
-		{
-			$tasks[] = $item;
-		}
-
-		$this->arResult['TASKS'] = $tasks;
+		// $result = TaskTable::getList([
+		// 	'select' => [
+		// 		'*',
+		// 		'STATUS_NAME' => 'STATUS.NAME',
+		// 		'PRIORITY_NAME' => 'PRIORITY.NAME',
+		// 		'RESPONSIBLE_NAME' => 'RESPONSIBLE.NAME'
+		// 	]
+		// ]);
+		// $tasks = [];
+		//
+		// foreach ($result as $item)
+		// {
+		// 	$tasks[] = $item;
+		// }
+		//
+		// $this->arResult['TASKS'] = $tasks;
 	}
 
 	protected function deleteTask()
 	{
+		Context::getCurrent()->getRequest()->isPost();
 
 	}
 }

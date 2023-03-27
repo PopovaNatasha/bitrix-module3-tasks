@@ -41,60 +41,13 @@ this.BX.Up = this.BX.Up || {};
 	          reject(error);
 	        });
 	      });
-	    } // render()
-	    // {
-	    // 	this.rootNode.innerHTML = '';
-	    //
-	    // 	let table = this.rootNode;
-	    // 	let thead = document.createElement('thead');
-	    // 	let tbody = document.createElement('tbody');
-	    //
-	    // 	table.appendChild(thead);
-	    // 	table.appendChild(tbody);
-	    //
-	    // 	let headRow = document.createElement('tr');
-	    //
-	    // 	let headId = document.createElement('th');
-	    // 	headId.innerHTML = "#";
-	    //
-	    // 	let headTask = document.createElement('th');
-	    // 	headTask.innerHTML = "Task";
-	    //
-	    // 	let headDelete = document.createElement('th');
-	    // 	headDelete.innerHTML = "";
-	    //
-	    // 	headRow.appendChild(headId);
-	    // 	headRow.appendChild(headTask);
-	    // 	headRow.appendChild(headDelete);
-	    //
-	    // 	thead.appendChild(headRow);
-	    //
-	    // 	this.taskList.forEach(taskData => {
-	    // 		let row = document.createElement('tr');
-	    //
-	    // 		let rowId = document.createElement('td');
-	    // 		rowId.innerHTML = taskData.ID;
-	    //
-	    // 		let rowTask = document.createElement('td');
-	    // 		rowTask.innerHTML = taskData.NAME;
-	    //
-	    // 		let rowDelete = document.createElement('td');
-	    // 		let buttonDelete = document.createElement('button');
-	    // 		rowDelete.appendChild(buttonDelete).className = "delete is-small";
-	    //
-	    // 		row.appendChild(rowId);
-	    // 		row.appendChild(rowTask);
-	    // 		row.appendChild(rowDelete);
-	    //
-	    // 		tbody.appendChild(row);
-	    // 	});
-	    // }
+	    }
 	  }, {
 	    key: "render",
 	    value: function render() {
 	      var table = this.rootNode;
 	      var taskList = this.taskList;
-	      var headList = ['#', 'Task', ''];
+	      var headList = ['#', 'Task', 'Status', 'Priority', 'Responsible', ''];
 	      var thead = document.createElement('thead');
 	      var tbody = document.createElement('tbody');
 	      table.appendChild(thead);
@@ -111,10 +64,11 @@ this.BX.Up = this.BX.Up || {};
 	        for (var key in taskData) {
 	          var td = document.createElement('td');
 	          td.innerHTML = taskData[key];
-	          tr.appendChild(td);
+	          tr.appendChild(td).className = 'task';
 	        }
 	        var rowDelete = document.createElement('td');
 	        var buttonDelete = document.createElement('button');
+	        buttonDelete.id = taskData['ID'];
 	        rowDelete.appendChild(buttonDelete).className = "delete is-small";
 	        tr.appendChild(rowDelete);
 	        tbody.appendChild(tr);

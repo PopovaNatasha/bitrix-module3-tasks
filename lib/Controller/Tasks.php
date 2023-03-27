@@ -8,7 +8,7 @@ use Bitrix\Main\Engine\Controller,
 
 class Tasks extends Controller
 {
-	protected const TASK_PER_PAGE = 10;
+	protected const TASK_PER_PAGE = 40;
 
 	public function getListAction(int $pageNumber = 1): ?array
 	{
@@ -27,23 +27,8 @@ class Tasks extends Controller
 		];
 	}
 
-	// public function createTaskAction(string $task): void
-	// {
-	// 	$task = trim($task);
-	// 	if ($task === '')
-	// 	{
-	// 		$this->addError(new Error('Task can not be empty'));
-	// 	}
-	// 	else
-	// 	{
-	// 		try
-	// 		{
-	// 			Repository::addTask($task);
-	// 		}
-	// 		catch (\Exception $e)
-	// 		{
-	// 			$this->addError(new Error($e->getMessage()));
-	// 		}
-	// 	}
-	// }
+	public function deleteTaskAction(int $pageNumber = 1)
+	{
+
+	}
 }

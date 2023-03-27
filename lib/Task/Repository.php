@@ -2,6 +2,8 @@
 
 namespace Up\Tasks\Task;
 
+use Up\Tasks\Model\PriorityTable;
+use Up\Tasks\Model\ResponsibleTable;
 use Up\Tasks\Model\TaskTable;
 
 class Repository
@@ -17,27 +19,16 @@ class Repository
 			$offset = 0;
 		}
 
-		$taskList = TaskTable::getList([
+		return TaskTable::getList([
 			'select' => [
 				'ID',
 				'NAME',
+				'STATUS_NAME' => 'STATUS.NAME',
+				'PRIORITY_NAME' => 'PRIORITY.NAME',
+				'RESPONSIBLE_NAME' => 'RESPONSIBLE.NAME'
 			],
 			'limit' => $itemPerPage,
 			'offset' => $offset,
 		])->fetchAll();
-
-		return $taskList;
 	}
-
-	// public static function addTask(string $task)
-	// {
-	// 	$result = TaskTable::add([
-	// 		'NAME' => $task,
-	// 	]);
-	//
-	// 	if (!$result->isSuccess)
-	// 	{
-	// 		throw new \Exception($result->getErrors);
-	// 	}
-	// }
 }

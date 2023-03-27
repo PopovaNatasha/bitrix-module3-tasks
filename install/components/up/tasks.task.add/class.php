@@ -12,24 +12,24 @@ class TaskAddComponent extends CBitrixComponent
 {
 	public function executeComponent()
 	{
-		$method = Context::getCurrent()->getRequest()->getRequestMethod();
+		try
+		{
+			$this->fetchTaskPriority();
+			$this->fetchTaskResponsible();
+			$this->includeComponentTemplate();
 
-		if ($method === 'GET')
-		{
-			$this->fetchTaskResponsible();
-			$this->fetchTaskPriority();
-			$this->includeComponentTemplate();
+			if (Context::getCurrent()->getRequest()->isPost())
+			{
+				$this->addTask();
+			}
 		}
-		if ($method === 'POST')
+		catch (Exception $e)
 		{
-			$this->addTask();
-			$this->fetchTaskResponsible();
-			$this->fetchTaskPriority();
-			$this->includeComponentTemplate();
+			ShowError($e->getMessage());
 		}
 	}
 
-	protected function fetchTaskResponsible()
+	protected function fetchTaskResponsible(): void
 	{
 		$responsibleList = ResponsibleTable::getList([
 			'select' => ['NAME']
@@ -57,6 +57,11 @@ class TaskAddComponent extends CBitrixComponent
 	{
 		$task = Context::getCurrent()->getRequest()->getPostList()->toArray();
 
+		if (trim($task) === '')
+		{
+			throw new Exception('Task can not be empty');
+		}
+
 		$responsibleId = ResponsibleTable::getRow([
 			'select' => ['ID'],
 			'filter' => ['NAME' => $task['RESPONSIBLE']]
@@ -79,8 +84,7 @@ class TaskAddComponent extends CBitrixComponent
 
 		if ($result->isSuccess())
 		{
-			var_dump($result->getId());
+			$this->arResult['FORM_STATUS'] = 'SUCCESS';
 		}
-
 	}
 }
