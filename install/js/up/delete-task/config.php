@@ -8,7 +8,7 @@ return [
 	'css' => 'dist/delete-task.bundle.css',
 	'js' => 'dist/delete-task.bundle.js',
 	'rel' => [
-		'main.polyfill.core',
+		'main.core',
 	],
-	'skip_core' => true,
+	'skip_core' => false,
 ];

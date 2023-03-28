@@ -1,38 +1,34 @@
 this.BX = this.BX || {};
 this.BX.Up = this.BX.Up || {};
-(function (exports) {
+(function (exports,main_core) {
 	'use strict';
 
-	// import {Type} from 'main.core';
+	var DeleteTask = /*#__PURE__*/function () {
+	  function DeleteTask() {
+	    var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+	    babelHelpers.classCallCheck(this, DeleteTask);
+	    // this.taskId = '';
+	    this.rootNodeId = options.rootNodeId;
+	    console.log(this.rootNodeId);
+	  }
+	  babelHelpers.createClass(DeleteTask, [{
+	    key: "deleteTask",
+	    value: function deleteTask() {
+	      return new Promise(function (resolve, reject) {
+	        BX.ajax.runAction('up:tasks.tasks.DeleteTask', {
+	          taskId: 1
+	        }).then(function (response) {
+	          var taskList = response.data.taskList;
+	          resolve(taskList);
+	        })["catch"](function (error) {
+	          reject(error);
+	        });
+	      });
+	    }
+	  }]);
+	  return DeleteTask;
+	}();
 
-	// export class DeleteTask
-	// {
-	// 	constructor(options = {})
-	// 	{
-	// 		this.taskId = '';
-	// 		$this.taskId = options.taskId;
-	// 		console.log($this.taskId);
-	// 	}
+	exports.DeleteTask = DeleteTask;
 
-	// deleteTask()
-	// {
-	// 	return new Promise((resolve, reject) => {
-	// 		BX.ajax.runAction(
-	// 				'up:tasks.tasks.DeleteTask',
-	// 				{
-	// 					taskId: 1,
-	// 				})
-	// 			.then((response) => {
-	// 				const taskList = response.data.taskList;
-	//
-	// 				resolve(taskList);
-	// 			})
-	// 			.catch((error) => {
-	// 				reject(error);
-	// 			})
-	// 		;
-	// 	});
-	// }
-	// }
-
-}((this.BX.Up.Tasks = this.BX.Up.Tasks || {})));
+}((this.BX.Up.Tasks = this.BX.Up.Tasks || {}),BX));

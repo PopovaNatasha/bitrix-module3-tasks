@@ -78,7 +78,7 @@ export class TaskList
 			for (var key in taskData)
 			{
 				let td = document.createElement('td');
-				td.innerHTML = taskData[key];
+				td.innerHTML = CUtil::JSEscape(taskData[key]);
 				tr.appendChild(td).className = 'task';
 			}
 			let rowDelete = document.createElement('td');
