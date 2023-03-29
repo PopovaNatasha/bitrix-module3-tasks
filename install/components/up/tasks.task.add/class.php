@@ -20,6 +20,7 @@ class TaskAddComponent extends CBitrixComponent
 			if (Context::getCurrent()->getRequest()->isPost())
 			{
 				$this->addTask();
+				header("Location: /");
 			}
 		}
 		catch (Exception $e)

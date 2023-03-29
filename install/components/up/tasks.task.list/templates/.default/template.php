@@ -55,6 +55,7 @@ if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true) die();
 			window.TasksDeleteTask = new BX.Up.Tasks.DeleteTask({
 				rootNodeId: id,
 			})
+			window.location.reload();
 		});
 	});
 </script>
