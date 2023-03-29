@@ -51,7 +51,7 @@ if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true) die();
 <script>
 	BX.ready(function() {
 		document.addEventListener('click', function(e) {
-			id = e.target.id;
+			let id = e.target.id;
 			window.TasksDeleteTask = new BX.Up.Tasks.DeleteTask({
 				rootNodeId: id,
 			})

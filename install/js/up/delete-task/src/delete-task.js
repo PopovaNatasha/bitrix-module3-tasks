@@ -4,9 +4,22 @@ export class DeleteTask
 {
 	constructor(options = {})
 	{
-		// this.taskId = '';
-		this.rootNodeId = options.rootNodeId;
-		console.log(this.rootNodeId);
+		if (Type.isStringFilled(options.rootNodeId))
+		{
+			this.rootNodeId = options.rootNodeId;
+		}
+		else
+		{
+			throw new Error('DeleteTask: "${this.rootNodeId}" required');
+		}
+
+		this.rootNode = document.getElementById(this.rootNodeId);
+		if (!this.rootNode)
+		{
+			throw new Error('DeleteTask: element with id "${this.rootNodeId}" not found');
+		}
+
+		this.deleteTask(this.rootNodeId);
 	}
 
 	deleteTask()
@@ -14,13 +27,12 @@ export class DeleteTask
 		return new Promise((resolve, reject) => {
 			BX.ajax.runAction(
 					'up:tasks.tasks.DeleteTask',
-					{
-						taskId: 1,
+					{data: {
+							taskId: Number(this.rootNodeId),
+						},
 					})
 				.then((response) => {
-					const taskList = response.data.taskList;
-
-					resolve(taskList);
+					console.log(response);
 				})
 				.catch((error) => {
 					reject(error);

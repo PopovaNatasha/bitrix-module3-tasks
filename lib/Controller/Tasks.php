@@ -8,7 +8,7 @@ use Bitrix\Main\Engine\Controller,
 
 class Tasks extends Controller
 {
-	protected const TASK_PER_PAGE = 40;
+	protected const TASK_PER_PAGE = 10;
 
 	public function getListAction(int $pageNumber = 1): ?array
 	{
@@ -27,8 +27,19 @@ class Tasks extends Controller
 		];
 	}
 
-	public function deleteTaskAction()
+	public function deleteTaskAction(int $taskId): ?bool
 	{
+		try
+		{
+			Repository::deleteTask($taskId);
 
+			return true;
+		}
+		catch (\Exception $error)
+		{
+			$this->addError(new Error($error->getMessage()));
+
+			return null;
+		}
 	}
 }
