@@ -20,7 +20,7 @@ class TaskAddComponent extends CBitrixComponent
 			if (Context::getCurrent()->getRequest()->isPost())
 			{
 				$this->addTask();
-				header("Location: /");
+				// header("Location: /");
 			}
 		}
 		catch (Exception $e)
@@ -32,24 +32,24 @@ class TaskAddComponent extends CBitrixComponent
 	protected function fetchTaskResponsible(): void
 	{
 		$responsibleList = ResponsibleTable::getList([
-			'select' => ['NAME']
+			'select' => ['ID', 'NAME']
 		]);
 
 		foreach ($responsibleList as $responsible)
 		{
-			$this->arResult['RESPONSIBLE'][] = $responsible['NAME'];
+			$this->arResult['RESPONSIBLE'][] = $responsible;
 		}
 	}
 
 	protected function fetchTaskPriority(): void
 	{
 		$priorityList = PriorityTable::getList([
-			'select' => ['NAME']
+			'select' => ['ID', 'NAME']
 		]);
 
 		foreach ($priorityList as $priority)
 		{
-			$this->arResult['PRIORITY'][] = $priority['NAME'];
+			$this->arResult['PRIORITY'][] = $priority;
 		}
 	}
 
@@ -57,23 +57,13 @@ class TaskAddComponent extends CBitrixComponent
 	{
 		$task = Context::getCurrent()->getRequest()->getPostList()->toArray();
 
-		if (trim($task) === '')
+		if (!trim($task['TASK']) || !trim($task['RESPONSIBLE']) || !trim($task['PRIORITY']))
 		{
-			throw new Exception('Task can not be empty');
+			throw new Exception('All fields must be hidden');
 		}
 
-		$responsibleId = ResponsibleTable::getRow([
-			'select' => ['ID'],
-			'filter' => ['NAME' => $task['RESPONSIBLE']]
-		]);
-
-		$priorityID = PriorityTable::getRow([
-			'select' => ['ID'],
-			'filter' => ['NAME' => $task['PRIORITY']]
-		]);
-
-		$responsibleId = (int)$responsibleId['ID'];
-		$priorityID = (int)$priorityID['ID'];
+		$responsibleId = (int)$task['RESPONSIBLE'];
+		$priorityID = (int)$task['PRIORITY'];
 
 		$result = TaskTable::add([
 			'NAME' => $task['TASK'],

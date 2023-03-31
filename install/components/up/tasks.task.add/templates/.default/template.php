@@ -31,7 +31,7 @@ if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true) die();
 					<div class="select" id="select-responsible">
 						<select name="RESPONSIBLE">
 							<?php foreach ($arResult['RESPONSIBLE'] as $responsible):?>
-								<option><?= $responsible ?></option>
+								<option value="<?= $responsible['ID'] ?>"><?= $responsible['NAME'] ?></option>
 							<?php endforeach; ?>
 						</select>
 					</div>
@@ -44,7 +44,7 @@ if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true) die();
 					<div class="select" id="select-priority">
 						<select name="PRIORITY">
 							<?php foreach ($arResult['PRIORITY'] as $priority):?>
-								<option><?= $priority ?></option>
+								<option value="<?= $priority['ID'] ?>"><?= $priority['NAME'] ?></option>
 							<?php endforeach; ?>
 						</select>
 					</div>
