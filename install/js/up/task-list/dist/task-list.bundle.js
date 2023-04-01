@@ -18,6 +18,15 @@ this.BX.Up = this.BX.Up || {};
 	    }
 	    this.taskList = [];
 	    this.reload();
+	    var _TaskList = this;
+	    document.addEventListener("click", function (event) {
+	      if (event.target.matches('button') && null !== event.target.closest('.delete')) {
+	        var taskId = event.target.id;
+	        _TaskList.deleteTask(taskId);
+	        var tableRow = this.getElementById('tr' + taskId);
+	        tableRow.remove();
+	      }
+	    });
 	  }
 	  babelHelpers.createClass(TaskList, [{
 	    key: "reload",
@@ -64,14 +73,30 @@ this.BX.Up = this.BX.Up || {};
 	        for (var key in taskData) {
 	          var td = document.createElement('td');
 	          td.innerHTML = taskData[key];
+	          tr.id = 'tr' + taskData['ID'];
 	          tr.appendChild(td).className = 'task';
 	        }
 	        var rowDelete = document.createElement('td');
 	        var buttonDelete = document.createElement('button');
 	        buttonDelete.id = taskData['ID'];
-	        rowDelete.appendChild(buttonDelete).className = "delete is-small";
+	        rowDelete.appendChild(buttonDelete).className = "delete";
 	        tr.appendChild(rowDelete);
 	        tbody.appendChild(tr);
+	      });
+	    }
+	  }, {
+	    key: "deleteTask",
+	    value: function deleteTask(taskId) {
+	      return new Promise(function (resolve, reject) {
+	        BX.ajax.runAction('up:tasks.tasks.DeleteTask', {
+	          data: {
+	            taskId: Number(taskId)
+	          }
+	        }).then(function (response) {
+	          console.log(response);
+	        })["catch"](function (error) {
+	          reject(error);
+	        });
 	      });
 	    }
 	  }]);

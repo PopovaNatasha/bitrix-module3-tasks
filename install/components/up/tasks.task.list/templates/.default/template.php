@@ -5,7 +5,6 @@
 */
 
 \Bitrix\Main\UI\Extension::load('up.task-list');
-\Bitrix\Main\UI\Extension::load('up.delete-task');
 
 if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true) die();
 ?>
@@ -44,18 +43,6 @@ if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true) die();
 	BX.ready(function() {
 		window.TasksTaskList = new BX.Up.Tasks.TaskList({
 			rootNodeId: 'task-list-app',
-		});
-	});
-</script>
-
-<script>
-	BX.ready(function() {
-		document.addEventListener('click', function(e) {
-			let id = e.target.id;
-			window.TasksDeleteTask = new BX.Up.Tasks.DeleteTask({
-				rootNodeId: id,
-			})
-			window.location.reload();
 		});
 	});
 </script>

@@ -21,6 +21,16 @@ export class TaskList
 
 		this.taskList = [];
 		this.reload();
+
+		let TaskList = this;
+		document.addEventListener("click", function(event) {
+			if(event.target.matches('button') && null !== event.target.closest('.delete')) {
+				let taskId = event.target.id;
+				TaskList.deleteTask(taskId);
+				let tableRow = this.getElementById('tr' + taskId);
+				tableRow.remove();
+			}
+		});
 	}
 
 	reload()
@@ -78,16 +88,36 @@ export class TaskList
 			for (var key in taskData)
 			{
 				let td = document.createElement('td');
-				td.innerHTML = CUtil::JSEscape(taskData[key]);
+				td.innerHTML = taskData[key];
+				tr.id = 'tr' + taskData['ID'];
 				tr.appendChild(td).className = 'task';
 			}
 			let rowDelete = document.createElement('td');
 			let buttonDelete = document.createElement('button');
 			buttonDelete.id = taskData['ID'];
-			rowDelete.appendChild(buttonDelete).className = "delete is-small";
+			rowDelete.appendChild(buttonDelete).className = "delete";
 			tr.appendChild(rowDelete);
 
 			tbody.appendChild(tr);
+		});
+	}
+
+	deleteTask(taskId)
+	{
+		return new Promise((resolve, reject) => {
+			BX.ajax.runAction(
+					'up:tasks.tasks.DeleteTask',
+					{data: {
+							taskId: Number(taskId),
+						},
+					})
+				.then((response) => {
+					console.log(response);
+				})
+				.catch((error) => {
+					reject(error);
+				})
+			;
 		});
 	}
 }
