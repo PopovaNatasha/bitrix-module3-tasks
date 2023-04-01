@@ -32,24 +32,19 @@ class TaskAddComponent extends CBitrixComponent
 	{
 		$responsibleList = ResponsibleTable::getList([
 			'select' => ['ID', 'NAME']
-		]);
+		])->fetchAll();
 
-		foreach ($responsibleList as $responsible)
-		{
-			$this->arResult['RESPONSIBLE'][] = $responsible;
-		}
+			$this->arResult['RESPONSIBLE'] = $responsibleList;
+
 	}
 
 	protected function fetchTaskPriority(): void
 	{
 		$priorityList = PriorityTable::getList([
 			'select' => ['ID', 'NAME']
-		]);
+		])->fetchAll();
 
-		foreach ($priorityList as $priority)
-		{
-			$this->arResult['PRIORITY'][] = $priority;
-		}
+		$this->arResult['PRIORITY'] = $priorityList;
 	}
 
 	protected function addTask(): void
