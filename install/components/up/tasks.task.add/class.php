@@ -20,7 +20,6 @@ class TaskAddComponent extends CBitrixComponent
 			if (Context::getCurrent()->getRequest()->isPost())
 			{
 				$this->addTask();
-				// header("Location: /");
 			}
 		}
 		catch (Exception $e)
@@ -74,7 +73,7 @@ class TaskAddComponent extends CBitrixComponent
 
 		if ($result->isSuccess())
 		{
-			$this->arResult['FORM_STATUS'] = 'SUCCESS';
+			ShowMessage(['TYPE' => 'OK', 'MESSAGE' => 'Задача успешно добавлена']);
 		}
 	}
 }

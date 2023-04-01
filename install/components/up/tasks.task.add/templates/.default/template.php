@@ -7,13 +7,6 @@
 if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true) die();
 ?>
 
-<?php if ($arResult['FORM_STATUS'] === 'SUCCESS'):?>
-	<div class="notification is-primary" id="notification" style="display: block">
-		<button class="delete" onclick="(document.getElementById('notification').style.display='none')"></button>
-		Задача успешно добавлена
-	</div>
-<?php endif;?>
-
 <form class="form-create-task" method="post" action="<?=POST_FORM_ACTION_URI?>">
 
 	<div class="form-content" id="form-task-add">
